@@ -1,0 +1,363 @@
+Data Structures
+(Lab)
+Task 2
+Name: Muhammad Aamir
+ SAP ID: 54676
+ Semester: 3rd
+Q1:Write a program in C++ that take integer type 
+2D array from user, calculate sum multiplication 
+and average of all numbers.
+#include <iostream>
+using namespace std;
+int main() {
+ int rows, cols;
+ 
+ 
+ cout << "Enter number of rows: ";
+ cin >> rows;
+ cout << "Enter number of columns: ";
+ cin >> cols;
+ int arr[rows][cols]; // Define 2D array
+ 
+ cout << "Enter elements of the array:" << endl;
+ for (int i = 0; i < rows; i++) {
+ for (int j = 0; j < cols; j++) {
+ 
+ cin >> arr[i][j];
+ }
+ }
+ int sum = 0;
+ long long product = 1; 
+ int totalElements = rows * cols;
+ 
+ for (int i = 0; i < rows; i++) {
+ for (int j = 0; j < cols; j++) {
+ sum += arr[i][j];
+ product *= arr[i][j];
+ }
+ }
+ 
+ double average = sum / (totalElements * 1.0); 
+ cout << "Sum: " << sum << endl;
+ cout << "Product: " << product << endl;
+ cout << "Average: " << average << endl;
+ return 0;
+}
+Q2: Write a program in C++ to swap values of two 
+variables using pointers.
+#include <iostream>
+using namespace std;
+void changeValues(int* a, int* b) {
+ int temp = *a; 
+ *a = *b; 
+ *b = temp; 
+}
+int main() {
+ int x, y;
+ cout << "Enter the value of x: ";
+ cin >> x;
+ cout << "Enter the value of y: ";
+ cin >> y;
+ cout << "Before change: x = " << x << ", y = " << y << endl;
+ changeValues(&x, &y);
+ cout << "After change: x = " << x << ", y = " << y << endl;
+ return 0;
+}
+Q3: Write a program that lets the user to enter the 
+10 values into the array. The program should then 
+display the largest and the smallest values stored 
+in the array.
+#include <iostream>
+using namespace std;
+int main() {
+ const int size = 10; 
+ int arr[size];
+ cout << "Enter 10 values:" << endl;
+ for (int i = 0; i < size; i++) {
+ cout << "Value " << i + 1 << ": ";
+ cin >> arr[i];
+ }
+ int largest = arr[0];
+ int smallest = arr[0];
+ for (int i = 1; i < size; i++) {
+ if (arr[i] > largest) {
+ largest = arr[i];
+ }
+ if (arr[i] < smallest) {
+ smallest = arr[i];
+ }
+ }
+ cout << "The largest value is: " << largest << endl;
+ cout << "The smallest value is: " << smallest << endl;
+ return 0;
+}
+Q4: Write a program that lets the user to enter the 
+total rainfall for each of 12 months into an array of 
+doubles. The program should calculate and display 
+the total rainfall for the year, the average monthly 
+rainfall and the month with the highest and lowest 
+rainfall.
+#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+ int months = 12;
+ double rainfall[months];
+ string monthNames[months] = {"January", "February", "March", "April", "May", 
+"June", 
+ "July", "August", "September", "October", "November", 
+"December"};
+ cout << "Enter the total rainfall (in mm) for each month:" << endl;
+ for (int i = 0; i < months; i++) {
+ cout << monthNames[i] << ": ";
+ cin >> rainfall[i];
+ }
+ double totalRainfall = 0;
+ double highestRainfall = rainfall[0];
+ double lowestRainfall = rainfall[0];
+ int highestMonth = 0;
+ int lowestMonth = 0;
+ for (int i = 0; i < months; i++) {
+ totalRainfall += rainfall[i]; 
+ if (rainfall[i] > highestRainfall) {
+ highestRainfall = rainfall[i];
+ highestMonth = i; 
+ }
+ if (rainfall[i] < lowestRainfall) {
+ lowestRainfall = rainfall[i];
+ lowestMonth = i; 
+ }
+ }
+ double averageRainfall = totalRainfall / months;
+ cout << "\nTotal rainfall for the year: " << totalRainfall << " mm" << endl;
+ cout << "Average monthly rainfall: " << averageRainfall << " mm" << endl;
+ cout << "Month with the highest rainfall: " << monthNames[highestMonth] << " 
+(" << highestRainfall << " mm)" << endl;
+ cout << "Month with the lowest rainfall: " << monthNames[lowestMonth] << " 
+(" << lowestRainfall << " mm)" << endl;
+ return 0;
+}
+Q5: Write a program that creates a two dimensional 
+array initialized with test data. Perform the 
+following operations on the array data. Get total: 
+get total of all the elements in the array. Get 
+Average: calculate the average of all the values in 
+the array. Get row total: calculate the total of all the 
+values in the specified row. Get column total: 
+calculate the total of all the values in the specified 
+column. Get Highest in row: find the highest value 
+in the specified row. Get Highest in Column: find the 
+highest value in the specified column.
+#include <iostream>
+using namespace std;
+int getTotal(int arr[][4], int rows, int cols) {
+ int total = 0;
+ for (int i = 0; i < rows; i++) {
+ for (int j = 0; j < cols; j++) {
+ total += arr[i][j];
+ }
+ }
+ return total;
+}
+double getAverage(int arr[][4], int rows, int cols) {
+ int total = getTotal(arr, rows, cols);
+ int totalElements = rows * cols;
+ return total / (double)totalElements; 
+}
+int getRowTotal(int arr[][4], int rowIndex, int cols) {
+ int rowTotal = 0;
+ for (int j = 0; j < cols; j++) {
+ rowTotal += arr[rowIndex][j];
+ }
+ return rowTotal;
+}
+int getColumnTotal(int arr[][4], int rows, int colIndex) {
+ int colTotal = 0;
+ for (int i = 0; i < rows; i++) {
+ colTotal += arr[i][colIndex];
+ }
+ return colTotal;
+}
+int getHighestInRow(int arr[][4], int rowIndex, int cols) {
+ int highest = arr[rowIndex][0]; 
+ for (int j = 1; j < cols; j++) {
+ if (arr[rowIndex][j] > highest) {
+ highest = arr[rowIndex][j];
+ }
+ }
+ return highest;
+}
+int getHighestInColumn(int arr[][4], int rows, int colIndex) {
+ int highest = arr[0][colIndex]; 
+ for (int i = 1; i < rows; i++) {
+ if (arr[i][colIndex] > highest) {
+ highest = arr[i][colIndex];
+ }
+ }
+ return highest;
+}
+int main() {
+ int array[4][4] = {
+ {3, 5, 7, 9},
+ {2, 8, 6, 4},
+ {10, 1, 3, 7},
+ {9, 2, 5, 11}
+ };
+ 
+ int rows = 4;
+ int cols = 4;
+ 
+ cout << "Total of all elements: " << getTotal(array, rows, cols) << endl;
+ cout << "Average of all elements: " << getAverage(array, rows, cols) << endl;
+ cout << "Total of row 2: " << getRowTotal(array, 2, cols) << endl;
+ cout << "Total of column 3: " << getColumnTotal(array, rows, 3) << endl;
+ cout << "Highest value in row: " << getHighestInRow(array, 0, cols) << endl;
+ cout << "Highest value in column: " << getHighestInColumn(array, rows, 2) << 
+endl;
+ return 0;
+}
+Q6: Write a program that dynamically allocates an 
+array of integers. Read the values from user and 
+calculate the sum of odd integers.
+#include <iostream>
+using namespace std;
+int main() {
+ int n; 
+ cout << "Enter the number of integers: ";
+ cin >> n;
+ int* arr = new int[n];
+ cout << "Enter " << n << " integers:" << endl;
+ for (int i = 0; i < n; i++) {
+ cin >> arr[i];
+ }
+ int sumOdd = 0;
+ for (int i = 0; i < n; i++) {
+ if (arr[i] % 2 != 0) { 
+ sumOdd += arr[i];
+ }
+ }
+ cout << "The sum of odd integers is: " << sumOdd << endl;
+ delete[] arr;
+ return 0;
+}
+Q7: Define a pointer variable. Assign the address of 
+variable to a pointer variable and access the value of 
+address variable in the pointer variable.
+#include <iostream>
+using namespace std;
+int main() {
+ int n = 42; 
+ int* ptr; 
+ ptr = &n;
+ cout << "Value of variable: " << n << endl;
+ cout << "Address of variable: " << &n << endl;
+ cout << "Pointer ptr holds the address: " << ptr << endl;
+ cout << "Value at the address stored in ptr: " << *ptr << endl;
+ return 0;
+}
+Q8: Write a program that asks the user to enter 
+integers as inputs to be stored in the variables 'a' and 
+'b' respectively. There are also two integer pointers 
+named ptrA and ptrB. Assign the values of 'a' and 'b' 
+to ptrA and ptrB respectively, and display them.
+#include <iostream>
+using namespace std;
+int main() {
+ int a, b; 
+ int* ptrA; 
+ int* ptrB; 
+ 
+ cout << "Enter an integer for 'a': ";
+ cin >> a;
+ cout << "Enter an integer for 'b': ";
+ cin >> b;
+ ptrA = &a;
+ ptrB = &b;
+ cout << "Value of 'a' in pointer ptrA: " << *ptrA << endl;
+ cout << "Value of 'b' in pointer ptrB: " << *ptrB << endl;
+ return 0;
+}
+Q9: Write a program for a calculator using 
+functions. Your program must have the following 
+functions: a. Menu () telling the user to select from 
+the options b. Addition (int a, int b) adding two 
+numbers c. Subtraction (int a, int b) d. Division (int 
+a, int b) e. Multiplication (int a, int b) f. Pow (int 
+number, int pow) In the main function you will only 
+call the menu () function.
+#include <iostream>
+#include <cmath> 
+using namespace std;
+int Addition(int a, int b) {
+ return a + b;
+}
+int Subtraction(int a, int b) {
+ return a - b;
+}
+int Multiplication(int a, int b) {
+ return a * b;
+}
+double Division(int a, int b) {
+ if (b != 0) {
+ return (double)a / b; 
+ } else {
+ cout << "Error! Division by zero." << endl;
+ return 0;
+ }
+}
+int Pow(int number, int power) {
+ return pow(number, power); 
+}
+void Menu() {
+ 
+ int choice;
+ int num1, num2;
+ 
+ cout << "Select an operation:\n";
+ cout << "1. Addition\n";
+ cout << "2. Subtraction\n";
+ cout << "3. Multiplication\n";
+ cout << "4. Division\n";
+ cout << "5. Power\n";
+ 
+ cout << "Enter your choice: ";
+ cin >> choice;
+ 
+ switch (choice) {
+ case 1: 
+ cout << "Enter two numbers: ";
+ cin >> num1 >> num2;
+ cout << "Result: " << Addition(num1, num2) << endl;
+ break;
+ case 2: 
+ cout << "Enter two numbers: ";
+ cin >> num1 >> num2;
+ cout << "Result: " << Subtraction(num1, num2) << endl;
+ break;
+ case 3: 
+ cout << "Enter two numbers: ";
+ cin >> num1 >> num2;
+ cout << "Result: " << Multiplication(num1, num2) << endl;
+ break;
+ case 4: 
+ cout << "Enter two numbers: ";
+ cin >> num1 >> num2;
+ cout << "Result: " << Division(num1, num2) << endl;
+ break;
+ case 5: 
+ cout << "Enter the base number and the exponent: ";
+ cin >> num1 >> num2;
+ cout << "Result: " << Pow(num1, num2) << endl;
+ break;
+ default: 
+ cout << "Invalid choice. Please select a valid operation." << endl;
+ break;
+ }
+ 
+ 
+}
+int main() {
+ 
+ Menu(); 
+ return 0;
+}
